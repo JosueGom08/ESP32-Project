@@ -12,13 +12,12 @@
 #define PIN_DHT 15   // Pin de datos del DHT22
 
 unsigned long tAnterior = 0; // util para utilizar millis
-const char* ssid = "Wokwi-GUEST"; // Red
+const char* ssid = "Wokwi-GUEST";
 const char* password = ""; // contrasena
 
 // Configuracion DHT (sensor de temperatura)
 #define DHTTYPE DHT22
 DHT dht(PIN_DHT, DHTTYPE);
-// https://ntfy.sh/antoniog2004
 // Función para medir distancia
 float medirDistancia() {
   digitalWrite(PIN_TRIG, LOW);
