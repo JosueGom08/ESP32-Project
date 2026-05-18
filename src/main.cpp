@@ -98,22 +98,24 @@ void loop() {
     }
 
 
-    if(WiFi.status() == WL_CONNECTED){
-      HTTPClient http;
+    if(WiFi.status() == WL_CONNECTED){ // revisamos si seguimos conectados
+      HTTPClient http; // creamos el cliente 
 
-      http.begin("https://ntfy.sh/antoniog2004");
+      http.begin("https://ntfy.sh/antoniog2004"); // direccion
 
-      int codigoRespuesta1 = http.POST(String(distancia));
-      int codigoRespuesta2 = http.POST(String(temperatura));
+      char value[50];
+      sprintf(value, "Resultados Obtenidos: %d cm %d C", (int)distancia, (int)temperatura); // string que sera enviado a la direccion
+      int codigoRespuesta = http.POST(value); // enviamos el string completo
+      
 
-      if(codigoRespuesta1 == 200 && codigoRespuesta2 == 200){
-        Serial.print(F("Enviado correctamente !"));
+      if(codigoRespuesta == 200){ // si todo fue un exito
+        Serial.print(F("Enviado correctamente !")); // imprime que lo fue
         Serial.println(distancia);
         Serial.println(temperatura);
-      }else{
+      }else{ // si no fue un exito
         Serial.println(F("No se pudo realizar el envio de informacion"));
       }
-      http.end();
+      http.end(); // terminamos la sesion
     } 
   }
  
