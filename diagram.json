@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "author": "Simulación ESP32 con Dos LEDs",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -48, "left": -4.4, "attrs": {} },
+    { "type": "wokwi-led", "id": "led1", "top": -144, "left": -111.6, "attrs": { "color": "red" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": -81.6, "left": -115.2, "attrs": { "value": "220" } },
+    { "type": "wokwi-hc-sr04", "id": "ultrasonic", "top": -264, "left": 60, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht", "top": -156.3, "left": 161.4, "attrs": {} },
+    { "type": "wokwi-led", "id": "led2", "top": 124.8, "left": 67.2, "attrs": { "color": "green" } },
+    { "type": "wokwi-resistor", "id": "r2", "top": 182.4, "left": 62.4, "attrs": { "value": "220" } }
+  ],
+  "connections": [
+    [ "esp:GND.2", "r1:1", "black", [ "h0" ] ],
+    [ "r1:2", "led1:C", "black", [ "v0" ] ],
+    [ "esp:D21", "led1:A", "red", [ "h-48", "v-96" ] ],
+    
+    [ "esp:GND.2", "ultrasonic:GND", "black", [ "h-28.8", "v-144" ] ],
+    [ "esp:3V3", "ultrasonic:VCC", "red", [ "h144", "v-163.2" ] ],
+    [ "esp:D12", "ultrasonic:TRIG", "green", [ "h19.2", "v-172.8" ] ],
+    [ "esp:D14", "ultrasonic:ECHO", "blue", [ "h9.6", "v-172.8" ] ],
+    
+    [ "esp:GND.1", "dht:GND", "black", [ "h48", "v-67.2" ] ],
+    [ "esp:3V3", "dht:VCC", "red", [ "h144", "v-67.2" ] ],
+    [ "esp:D15", "dht:SDA", "yellow", [ "h48", "v-48" ] ],
+    
+    [ "esp:D13", "led2:A", "green", [ "h-9.6", "v124.8" ] ],
+    [ "led2:C", "r2:2", "black", [ "v0" ] ],
+    [ "r2:1", "esp:GND.1", "black", [ "h19.2", "v124.8" ] ]
+  ],
+  "dependencies": {}
+}
